@@ -35,28 +35,26 @@ public class Kth_smallest {
 
     public static int binarySearch(int[] arrayOne, int[] arrayTwo, int kthIndex) {
         int low = 0;
-        int high = arrayOne.length;
+        int high =arrayOne.length;
         while (low <= high) {
-            int middle = (low + high - 1) / 2;
-            int middle2 = kthIndex - middle;
-
-            int lower1 = arrayOne[middle-1];
-            int lower2 = middle2 >= 0 ? arrayTwo[middle2-1] : Integer.MIN_VALUE; // compare the values to ensure they are
-                                                                              // minumim
-            int right1 = middle+1 < arrayOne.length?  arrayOne[middle+1] : Integer.MAX_VALUE;
-            int right2 = middle2+1 < arrayTwo.length?  arrayTwo[middle2+1] : Integer.MAX_VALUE;
-            if(lower1 <= right2 && lower2 <= right1){
+            int middle = (high-low)/2;
+            int middle2 = kthIndex - middle-2;
+            int lower1 = arrayOne[middle];
+            int lower2 = middle2 >= 0 ? arrayTwo[middle2] : Integer.MIN_VALUE; // compare the values to ensure they
+                                                                                   // are
+                                                                                   // minumim
+            int right1 = middle + 1 < arrayOne.length ? arrayOne[middle + 1] : Integer.MAX_VALUE;
+            int right2 = middle2 + 1 < arrayTwo.length ? arrayTwo[middle2 + 1] : Integer.MAX_VALUE;
+            if (lower1 <= right2 && lower2 <= right1) {
                 return Math.max(lower1, lower2);
-            } 
-            else if(lower1 >= right2){
-                high= middle;
+            } else if (lower1 >= right2) {
+                high = middle;
 
-            }
-            else{
-                low = middle-1;
+            } else {
+                low = middle + 1;
             }
 
         }
-        return arrayTwo[kthIndex-1];
+        return arrayTwo[kthIndex - 1];
     }
 }
